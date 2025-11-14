@@ -15,6 +15,28 @@ class CoffeeOrder:
         return self.description if self.description else f'Price: {self.price:.2f}'
 
 class CoffeeOrderBuilder:
+    """
+    Строитель для создания заказов на кофе с использованием текучего интерфейса.
+    
+    Позволяет пошагово настроить напиток (базу, размер, добавки),
+    автоматически рассчитывает итоговую стоимость и генерирует
+    человекочитаемое описание. Метод build() финализирует заказ.
+    
+    Правила и ограничения:
+    - Обязательные поля: base (база) и size (размер) должны быть указаны.
+    - Максимум сиропов: 4.
+    - Диапазон сахара: от 0 до 5 ложек.
+    
+    Пример использования:
+        builder = CoffeeOrderBuilder()
+        order = (
+            builder.set_base("latte")
+            .set_size("medium")
+            .add_syrup("vanilla")
+            .build()
+        )
+        print(order)
+    """
     BASE_PRICES = { 'espresso': 200, 'americano': 250, 'latte': 300, 'cappuccino': 320 }
     SIZE_MULTIPLIERS = { 'small': 1.0, 'medium': 1.2, 'large': 1.4 }
     MILK_PRICES = { 'none': 0.0, 'whole': 30, 'skim': 30, 'oat': 60, 'soy': 50 }
